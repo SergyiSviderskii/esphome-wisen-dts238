@@ -1,0 +1,595 @@
+﻿INFO ESPHome 2026.9.1
+INFO Loaded validated config cache for smart-metr-electricity.yaml, skipping validation.
+INFO Starting log output from 192.168.0.40 using esphome API
+INFO Successfully resolved smart-metr-electricity @ 192.168.0.40 in 0.000s
+INFO Successfully resolved smart-metr-electricity @ 192.168.0.40 in 0.000s
+INFO Successfully connected to smart-metr-electricity @ 192.168.0.40 in 0.010s
+INFO Successful handshake with smart-metr-electricity @ 192.168.0.40 in 0.008s
+[23:30:28.829][I][app:151]: ESPHome version 2026.9.1 compiled on 2026-10-12 23:30:00 +0300
+[23:30:28.829][C][logger:216]: Logger:
+[23:30:28.829][C][logger:216]:   Max Level: DEBUG
+[23:30:28.829][C][logger:216]:   Initial Level: DEBUG
+[23:30:28.829][C][logger:223]:   Log Baud Rate: 0
+[23:30:28.829][C][logger:223]:   Hardware UART: NONE
+[23:30:28.877][C][uart:140]: UART Bus:
+[23:30:28.877][C][uart:131]:   TX Pin: GPIO1
+[23:30:28.877][C][uart:131]:   RX Pin: GPIO3
+[23:30:28.877][C][uart:144]:   RX Buffer Size: 256
+[23:30:28.877][C][uart:146]:   Baud Rate: 9600 baud
+[23:30:28.877][C][uart:146]:   Data Bits: 8
+[23:30:28.877][C][uart:146]:   Parity: NONE
+[23:30:28.877][C][uart:146]:   Stop bits: 1
+[23:30:28.877][C][uart:153]:   Using hardware serial interface.
+[23:30:28.877][C][uptime.sensor:017]: Uptime Sensor 'Time work'
+[23:30:28.877][C][uptime.sensor:017]:   State Class: ''
+[23:30:28.877][C][uptime.sensor:017]:   Unit of Measurement: ''
+[23:30:28.877][C][uptime.sensor:017]:   Accuracy Decimals: 0
+[23:30:28.877][C][uptime.sensor:165]:   Device Class: 'timestamp'
+[23:30:28.877][C][uptime.sensor:156]:   Icon: 'mdi:timer-outline'
+[23:30:28.877][C][uptime.sensor:032]:   Type: Timestamp
+[23:30:28.877][C][template.sensor:017]: Template Sensor 'Import Aktivnoi Energii'
+[23:30:28.877][C][template.sensor:017]:   State Class: 'total'
+[23:30:28.877][C][template.sensor:017]:   Unit of Measurement: 'kWh'
+[23:30:28.877][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:28.878][C][template.sensor:165]:   Device Class: 'energy'
+[23:30:28.878][C][template.sensor:156]:   Icon: 'mdi:transmission-tower-import'
+[23:30:28.878][C][template.sensor:338]:   Update Interval: never
+[23:30:28.895][C][template.sensor:017]: Template Sensor 'Export active energy'
+[23:30:28.895][C][template.sensor:017]:   State Class: 'total'
+[23:30:28.895][C][template.sensor:017]:   Unit of Measurement: 'kWh'
+[23:30:28.895][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:28.895][C][template.sensor:165]:   Device Class: 'energy'
+[23:30:28.895][C][template.sensor:156]:   Icon: 'mdi:transmission-tower-export'
+[23:30:28.897][C][template.sensor:338]:   Update Interval: never
+[23:30:28.903][C][template.sensor:017]: Template Sensor 'Contract active energy'
+[23:30:28.903][C][template.sensor:017]:   State Class: 'total'
+[23:30:28.903][C][template.sensor:017]:   Unit of Measurement: 'kWh'
+[23:30:28.903][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:28.903][C][template.sensor:165]:   Device Class: 'energy'
+[23:30:28.905][C][template.sensor:338]:   Update Interval: never
+[23:30:28.914][C][template.sensor:017]: Template Sensor 'Frequency'
+[23:30:28.914][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.914][C][template.sensor:017]:   Unit of Measurement: 'Hz'
+[23:30:28.914][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:28.914][C][template.sensor:165]:   Device Class: 'frequency'
+[23:30:28.919][C][template.sensor:338]:   Update Interval: never
+[23:30:28.929][C][template.sensor:017]: Template Sensor 'RMS voltage phase a'
+[23:30:28.929][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.929][C][template.sensor:017]:   Unit of Measurement: 'V'
+[23:30:28.929][C][template.sensor:017]:   Accuracy Decimals: 1
+[23:30:28.929][C][template.sensor:165]:   Device Class: 'voltage'
+[23:30:28.929][C][template.sensor:338]:   Update Interval: never
+[23:30:28.967][C][template.sensor:017]: Template Sensor 'RMS current phase a'
+[23:30:28.967][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.967][C][template.sensor:017]:   Unit of Measurement: 'A'
+[23:30:28.967][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:28.967][C][template.sensor:165]:   Device Class: 'current'
+[23:30:28.967][C][template.sensor:338]:   Update Interval: never
+[23:30:28.967][C][template.sensor:017]: Template Sensor 'RMS active power phase a'
+[23:30:28.967][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.967][C][template.sensor:017]:   Unit of Measurement: 'kW'
+[23:30:28.967][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:28.967][C][template.sensor:165]:   Device Class: 'power'
+[23:30:28.967][C][template.sensor:338]:   Update Interval: never
+[23:30:28.967][C][template.sensor:017]: Template Sensor 'RMS reactive power phase a'
+[23:30:28.967][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.967][C][template.sensor:017]:   Unit of Measurement: 'kvar'
+[23:30:28.967][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:28.967][C][template.sensor:165]:   Device Class: 'reactive_power'
+[23:30:28.967][C][template.sensor:338]:   Update Interval: never
+[23:30:28.967][C][template.sensor:017]: Template Sensor 'RMS power factor phase a'
+[23:30:28.967][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:28.967][C][template.sensor:017]:   Unit of Measurement: '%'
+[23:30:28.967][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:28.967][C][template.sensor:165]:   Device Class: 'power_factor'
+[23:30:28.967][C][template.sensor:338]:   Update Interval: never
+[23:30:29.018][C][template.sensor:017]: Template Sensor 'RMS voltage phase b'
+[23:30:29.018][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.018][C][template.sensor:017]:   Unit of Measurement: 'V'
+[23:30:29.018][C][template.sensor:017]:   Accuracy Decimals: 1
+[23:30:29.018][C][template.sensor:165]:   Device Class: 'voltage'
+[23:30:29.018][C][template.sensor:338]:   Update Interval: never
+[23:30:29.018][C][template.sensor:017]: Template Sensor 'RMS current phase b'
+[23:30:29.018][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.018][C][template.sensor:017]:   Unit of Measurement: 'A'
+[23:30:29.018][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:29.018][C][template.sensor:165]:   Device Class: 'current'
+[23:30:29.018][C][template.sensor:338]:   Update Interval: never
+[23:30:29.019][C][template.sensor:017]: Template Sensor 'RMS active power phase b'
+[23:30:29.019][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.019][C][template.sensor:017]:   Unit of Measurement: 'kW'
+[23:30:29.019][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.019][C][template.sensor:165]:   Device Class: 'power'
+[23:30:29.019][C][template.sensor:338]:   Update Interval: never
+[23:30:29.021][C][template.sensor:017]: Template Sensor 'RMS reactive power phase b'
+[23:30:29.021][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.021][C][template.sensor:017]:   Unit of Measurement: 'kvar'
+[23:30:29.021][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.021][C][template.sensor:165]:   Device Class: 'reactive_power'
+[23:30:29.021][C][template.sensor:338]:   Update Interval: never
+[23:30:29.038][C][template.sensor:017]: Template Sensor 'RMS power factor phase b'
+[23:30:29.038][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.038][C][template.sensor:017]:   Unit of Measurement: '%'
+[23:30:29.038][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:29.038][C][template.sensor:165]:   Device Class: 'power_factor'
+[23:30:29.038][C][template.sensor:338]:   Update Interval: never
+[23:30:29.057][C][template.sensor:017]: Template Sensor 'RMS voltage phase c'
+[23:30:29.057][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.057][C][template.sensor:017]:   Unit of Measurement: 'V'
+[23:30:29.057][C][template.sensor:017]:   Accuracy Decimals: 1
+[23:30:29.057][C][template.sensor:165]:   Device Class: 'voltage'
+[23:30:29.057][C][template.sensor:338]:   Update Interval: never
+[23:30:29.076][C][template.sensor:017]: Template Sensor 'RMS current phase c'
+[23:30:29.076][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.076][C][template.sensor:017]:   Unit of Measurement: 'A'
+[23:30:29.076][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:29.076][C][template.sensor:165]:   Device Class: 'current'
+[23:30:29.076][C][template.sensor:338]:   Update Interval: never
+[23:30:29.095][C][template.sensor:017]: Template Sensor 'RMS active power phase c'
+[23:30:29.095][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.095][C][template.sensor:017]:   Unit of Measurement: 'kW'
+[23:30:29.095][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.095][C][template.sensor:165]:   Device Class: 'power'
+[23:30:29.095][C][template.sensor:338]:   Update Interval: never
+[23:30:29.109][C][template.sensor:017]: Template Sensor 'RMS reactive power phase c'
+[23:30:29.109][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.109][C][template.sensor:017]:   Unit of Measurement: 'kvar'
+[23:30:29.109][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.109][C][template.sensor:165]:   Device Class: 'reactive_power'
+[23:30:29.109][C][template.sensor:338]:   Update Interval: never
+[23:30:29.113][C][template.sensor:017]: Template Sensor 'RMS power factor phase c'
+[23:30:29.113][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.113][C][template.sensor:017]:   Unit of Measurement: '%'
+[23:30:29.113][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:29.113][C][template.sensor:165]:   Device Class: 'power_factor'
+[23:30:29.113][C][template.sensor:338]:   Update Interval: never
+[23:30:29.131][C][template.sensor:017]: Template Sensor 'RMS active power group'
+[23:30:29.131][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.131][C][template.sensor:017]:   Unit of Measurement: 'kW'
+[23:30:29.131][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.131][C][template.sensor:165]:   Device Class: 'power'
+[23:30:29.131][C][template.sensor:338]:   Update Interval: never
+[23:30:29.150][C][template.sensor:017]: Template Sensor 'RMS reactive power group'
+[23:30:29.150][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.150][C][template.sensor:017]:   Unit of Measurement: 'kvar'
+[23:30:29.150][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.150][C][template.sensor:165]:   Device Class: 'reactive_power'
+[23:30:29.150][C][template.sensor:338]:   Update Interval: never
+[23:30:29.161][C][template.sensor:017]: Template Sensor 'RMS power factor group'
+[23:30:29.161][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.161][C][template.sensor:017]:   Unit of Measurement: '%'
+[23:30:29.161][C][template.sensor:017]:   Accuracy Decimals: 3
+[23:30:29.161][C][template.sensor:165]:   Device Class: 'power_factor'
+[23:30:29.161][C][template.sensor:338]:   Update Interval: never
+[23:30:29.167][C][template.sensor:017]: Template Sensor 'Total active energy '
+[23:30:29.167][C][template.sensor:017]:   State Class: 'total'
+[23:30:29.167][C][template.sensor:017]:   Unit of Measurement: 'kWh'
+[23:30:29.167][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:29.167][C][template.sensor:165]:   Device Class: 'energy'
+[23:30:29.167][C][template.sensor:156]:   Icon: 'mdi:home-lightning-bolt'
+[23:30:29.169][C][template.sensor:338]:   Update Interval: never
+[23:30:29.186][C][template.sensor:017]: Template Sensor 'Total active power'
+[23:30:29.186][C][template.sensor:017]:   State Class: 'measurement'
+[23:30:29.186][C][template.sensor:017]:   Unit of Measurement: 'kW'
+[23:30:29.186][C][template.sensor:017]:   Accuracy Decimals: 4
+[23:30:29.186][C][template.sensor:165]:   Device Class: 'power'
+[23:30:29.188][C][template.sensor:338]:   Update Interval: never
+[23:30:29.204][C][template.sensor:017]: Template Sensor 'Purchase value'
+[23:30:29.204][C][template.sensor:017]:   State Class: ''
+[23:30:29.204][C][template.sensor:017]:   Unit of Measurement: ''
+[23:30:29.204][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:29.204][C][template.sensor:156]:   Icon: 'mdi:currency-usd'
+[23:30:29.207][C][template.sensor:338]:   Update Interval: never
+[23:30:29.212][C][template.sensor:017]: Template Sensor 'Balance kWh'
+[23:30:29.212][C][template.sensor:017]:   State Class: ''
+[23:30:29.212][C][template.sensor:017]:   Unit of Measurement: 'kWh'
+[23:30:29.212][C][template.sensor:017]:   Accuracy Decimals: 2
+[23:30:29.212][C][template.sensor:156]:   Icon: 'mdi:transmission-tower-import'
+[23:30:29.214][C][template.sensor:338]:   Update Interval: never
+[23:30:29.223][C][status_led:062]: Status Led Light:
+[23:30:29.223][C][status_led:131]:   Pin: GPIO14
+[23:30:29.259][C][template.text_sensor:016]: Template Sensor 'Access point'
+[23:30:29.259][C][template.text_sensor:156]:   Icon: 'mdi:router-wireless'
+[23:30:29.259][C][gpio.binary_sensor:016]: GPIO Binary Sensor 'power_on'
+[23:30:29.262][C][gpio.binary_sensor:131]:   Pin: GPIO13
+[23:30:29.262][C][gpio.binary_sensor:068]:   Mode: interrupt
+[23:30:29.262][C][gpio.binary_sensor:070]:   Interrupt Type: ANY_EDGE
+[23:30:29.265][C][template.number:016]: Template Number 'Voltage high (V)'
+[23:30:29.265][C][template.number:156]:   Icon: 'mdi:sine-wave'
+[23:30:29.265][C][template.number:049]:   Optimistic: YES
+[23:30:29.268][C][template.number:338]:   Update Interval: never
+[23:30:29.279][C][template.number:016]: Template Number 'Voltage low (V)'
+[23:30:29.279][C][template.number:156]:   Icon: 'mdi:sine-wave'
+[23:30:29.281][C][template.number:049]:   Optimistic: YES
+[23:30:29.281][C][template.number:338]:   Update Interval: never
+[23:30:29.295][C][template.number:016]: Template Number 'Current high (A)'
+[23:30:29.298][C][template.number:156]:   Icon: 'mdi:current-ac'
+[23:30:29.298][C][template.number:049]:   Optimistic: YES
+[23:30:29.298][C][template.number:338]:   Update Interval: never
+[23:30:29.314][C][template.number:016]: Template Number 'The starting kWh value of meter (kWh)'
+[23:30:29.314][C][template.number:156]:   Icon: 'mdi:transmission-tower-import'
+[23:30:29.315][C][template.number:049]:   Optimistic: YES
+[23:30:29.317][C][template.number:338]:   Update Interval: never
+[23:30:29.317][C][template.number:016]: Template Number 'Metr price'
+[23:30:29.318][C][template.number:156]:   Icon: 'mdi:currency-usd'
+[23:30:29.318][C][template.number:049]:   Optimistic: YES
+[23:30:29.318][C][template.number:338]:   Update Interval: never
+[23:30:29.334][C][template.number:016]: Template Number 'Purchase kWh'
+[23:30:29.337][C][template.number:156]:   Icon: 'mdi:transmission-tower-import'
+[23:30:29.337][C][template.number:049]:   Optimistic: YES
+[23:30:29.337][C][template.number:338]:   Update Interval: never
+[23:30:29.352][C][template.number:016]: Template Number 'Setting balance alarm kWh'
+[23:30:29.352][C][template.number:156]:   Icon: 'mdi:transmission-tower-off'
+[23:30:29.352][C][template.number:049]:   Optimistic: YES
+[23:30:29.354][C][template.number:338]:   Update Interval: never
+[23:30:29.420][C][light:101]: Light 'status_led_on_off'
+[23:30:29.420][C][template.switch:086]: Template Switch 'pass'
+[23:30:29.420][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.424][C][template.switch:055]:   Optimistic: YES
+[23:30:29.437][C][template.switch:086]: Template Switch 'ON-OFF'
+[23:30:29.437][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.438][C][template.switch:156]:   Icon: 'mdi:power-standby'
+[23:30:29.440][C][template.switch:055]:   Optimistic: NO
+[23:30:29.456][C][template.switch:086]: Template Switch 'Lock'
+[23:30:29.456][C][template.switch:086]:   Restore Mode: always ON
+[23:30:29.456][C][template.switch:156]:   Icon: 'mdi:lock'
+[23:30:29.458][C][template.switch:055]:   Optimistic: YES
+[23:30:29.471][C][template.switch:086]: Template Switch 'Detail'
+[23:30:29.471][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.471][C][template.switch:156]:   Icon: 'mdi:form-select'
+[23:30:29.473][C][template.switch:055]:   Optimistic: YES
+[23:30:29.476][C][template.switch:086]: Template Switch 'Reset'
+[23:30:29.476][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.476][C][template.switch:156]:   Icon: 'mdi:tray-remove'
+[23:30:29.478][C][template.switch:055]:   Optimistic: YES
+[23:30:29.495][C][template.switch:086]: Template Switch 'Setting'
+[23:30:29.495][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.495][C][template.switch:156]:   Icon: 'mdi:cog-refresh'
+[23:30:29.497][C][template.switch:055]:   Optimistic: YES
+[23:30:29.513][C][template.switch:086]: Template Switch 'Save protec energy initial'
+[23:30:29.513][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.513][C][template.switch:156]:   Icon: 'mdi:tray-arrow-up'
+[23:30:29.516][C][template.switch:055]:   Optimistic: YES
+[23:30:29.523][C][template.switch:086]: Template Switch 'Prepayment fuction'
+[23:30:29.523][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.523][C][template.switch:055]:   Optimistic: YES
+[23:30:29.533][C][template.switch:086]: Template Switch 'Save prepayment'
+[23:30:29.533][C][template.switch:086]:   Restore Mode: always OFF
+[23:30:29.533][C][template.switch:156]:   Icon: 'mdi:tray-arrow-up'
+[23:30:29.533][C][template.switch:055]:   Optimistic: YES
+[23:30:29.567][C][adc:017]: ADC Sensor 'ESP Voltage'
+[23:30:29.567][C][adc:017]:   State Class: 'measurement'
+[23:30:29.567][C][adc:017]:   Unit of Measurement: 'V'
+[23:30:29.567][C][adc:017]:   Accuracy Decimals: 2
+[23:30:29.568][C][adc:165]:   Device Class: 'voltage'
+[23:30:29.568][C][adc:027]:   Pin: VCC
+[23:30:29.570][C][adc:031]:   Samples: 1
+[23:30:29.570][C][adc:031]:   Sampling mode: average
+[23:30:29.570][C][adc:340]:   Update Interval: 10.000s
+[23:30:29.578][C][homeassistant.time:009]: Home Assistant Time
+[23:30:29.580][C][time:049]: Timezone: UTC+2:00 (DST UTC+3:00)
+[23:30:29.580][C][time:055]: Current time: 2026-10-12 23:30:28
+[23:30:29.586][C][restart:086]: Restart Switch 'Restarting'
+[23:30:29.586][C][restart:086]:   Restore Mode: always OFF
+[23:30:29.589][C][restart:156]:   Icon: 'mdi:restart'
+[23:30:29.604][C][version.text_sensor:016]: Version Text Sensor 'ESPHome Version'
+[23:30:29.604][C][version.text_sensor:156]:   Icon: 'mdi:new-box'
+[23:30:29.626][C][wifi_info:016]: SSID 'SSID'
+[23:30:29.626][C][wifi_info:156]:   Icon: 'mdi:wifi-lock'
+[23:30:29.626][C][wifi_info:016]: BSSID 'BSSID'
+[23:30:29.656][C][wifi_info:016]: MAC Address 'Mac Wifi'
+[23:30:29.656][C][wifi_info:016]: IP Address 'IP'
+[23:30:29.656][C][wifi_info:156]:   Icon: 'mdi:ip'
+[23:30:29.678][C][wifi:1582]: WiFi:
+[23:30:29.678][C][wifi:1582]:   Local MAC: BC:DD:C2:3B:C6:F6
+[23:30:29.678][C][wifi:1582]:   Connected: YES
+[23:30:29.678][C][wifi:1286]:   IP Address: 192.168.0.40
+[23:30:29.678][C][wifi:1297]:   SSID: 'HOME_IoT_house_living_room'
+[23:30:29.678][C][wifi:1297]:   BSSID: B4:D0:A9:4A:71:F1
+[23:30:29.678][C][wifi:1297]:   Hostname: 'smart-metr-electricity'
+[23:30:29.678][C][wifi:1297]:   Signal strength: -58 dB ▂▄▆█
+[23:30:29.678][C][wifi:1297]:   Channel: 6
+[23:30:29.678][C][wifi:1297]:   Subnet: 255.255.255.0
+[23:30:29.678][C][wifi:1297]:   Gateway: 192.168.0.1
+[23:30:29.678][C][wifi:1297]:   DNS1: 192.168.0.1
+[23:30:29.678][C][wifi:1297]:   DNS2: 0.0.0.0
+[23:30:29.709][C][esphome.ota:125]: Over-The-Air updates:
+[23:30:29.709][C][esphome.ota:125]:   Address: smart-metr-electricity.local:8266
+[23:30:29.709][C][esphome.ota:125]:   Version: 2
+[23:30:29.709][C][esphome.ota:149]:   Password configured
+[23:30:29.709][C][safe_mode:058]: Safe Mode:
+[23:30:29.709][C][safe_mode:058]:   Successful after: 60s
+[23:30:29.709][C][safe_mode:058]:   Invoke after: 10 attempts
+[23:30:29.709][C][safe_mode:058]:   Duration: 300s
+[23:30:29.729][C][api:293]: Server:
+[23:30:29.729][C][api:293]:   Address: smart-metr-electricity.local:6053
+[23:30:29.729][C][api:293]:   Listen backlog: 1
+[23:30:29.729][C][api:293]:   Max connections: 4
+[23:30:29.729][C][api:305]:   Noise encryption: NO
+[23:30:29.729][C][wifi_signal.sensor:017]: WiFi Signal 'RSSI'
+[23:30:29.729][C][wifi_signal.sensor:017]:   State Class: 'measurement'
+[23:30:29.729][C][wifi_signal.sensor:017]:   Unit of Measurement: 'dBm'
+[23:30:29.729][C][wifi_signal.sensor:017]:   Accuracy Decimals: 0
+[23:30:29.731][C][wifi_signal.sensor:165]:   Device Class: 'signal_strength'
+[23:30:30.061][C][mdns:259]: mDNS:
+[23:30:30.061][C][mdns:259]:   Hostname: smart-metr-electricity
+[23:30:33.392][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:30:33.586][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:30:33.990][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.F7.00.00.00.00.00.47 (21)]
+[23:30:33.990][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.F7.00.00.00.00.00.47 (21)]
+[23:30:34.611][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:30:34.611][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:30:35.089][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.D2.00.02.54.00.02.36.09.2D.09.31.09.2B.00.00.46.0F.42.C8.00.00.F0.0F.42.61.00.0E.F7.00.05.7C.00.04.E4.00.04.96.02.F8.02.62.03.7C.03.72.13.82.00.01.7E.5F.00.01.7E.5F.00.00.00.00.4B (67)]
+[23:30:35.102][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.D2.00.02.54.00.02.36.09.2D.09.31.09.2B.00.00.46.0F.42.C8.00.00.F0.0F.42.61.00.0E.F7.00.05.7C.00.04.E4.00.04.96.02.F8.02.62.03.7C.03.72.13.82.00.01.7E.5F.00.01.7E.5F.00.00.00.00.4B (67)]
+[23:30:35.206][S][sensor]: 'Import Aktivnoi Energii' >> 978.87 kWh
+[23:30:35.206][S][sensor]: 'Contract active energy' >> 52066.55 kWh
+[23:30:35.206][S][sensor]: 'Frequency' >> 49.94 Hz
+[23:30:35.206][S][sensor]: 'RMS voltage phase a' >> 234.9 V
+[23:30:35.206][S][sensor]: 'RMS current phase a' >> 0.978 A
+[23:30:35.206][S][sensor]: 'RMS active power phase a' >> 0.1404 kW
+[23:30:35.206][S][sensor]: 'RMS reactive power phase a' >> -0.0136 kvar
+[23:30:35.206][S][sensor]: 'RMS current phase b' >> 0.596 A
+[23:30:35.206][S][sensor]: 'RMS active power phase b' >> 0.1252 kW
+[23:30:35.206][S][sensor]: 'RMS reactive power phase b' >> 0.0240 kvar
+[23:30:35.206][S][sensor]: 'RMS power factor phase b' >> 0.892 %
+[23:30:35.206][S][sensor]: 'RMS current phase c' >> 0.566 A
+[23:30:35.206][S][sensor]: 'RMS active power phase c' >> 0.1174 kW
+[23:30:35.206][S][sensor]: 'RMS reactive power phase c' >> -0.0033 kvar
+[23:30:35.206][S][sensor]: 'RMS power factor phase c' >> 0.882 %
+[23:30:35.206][S][sensor]: 'RMS active power group' >> 0.3831 kW
+[23:30:35.206][S][sensor]: 'RMS reactive power group' >> 0.0070 kvar
+[23:30:35.206][S][sensor]: 'RMS power factor group' >> 0.760 %
+[23:30:35.206][S][sensor]: 'Total active energy ' >> 978.87 kWh
+[23:30:35.206][S][sensor]: 'Total active power' >> 0.3831 kW
+[23:30:37.790][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:30:47.780][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:30:48.785][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:30:48.785][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:30:48.992][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0F.1C.00.00.00.00.00.6D (21)]
+[23:30:48.996][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0F.1C.00.00.00.00.00.6D (21)]
+[23:30:49.527][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:30:49.527][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:30:50.193][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.FC.00.02.51.00.02.31.09.2F.09.31.09.2B.00.00.8A.0F.42.A8.00.00.F0.00.00.03.00.0F.2E.00.05.B5.00.04.E4.00.04.95.02.F2.02.57.03.7F.03.79.13.83.00.01.7E.5F.00.01.7E.5F.00.00.00.00.4E (67)]
+[23:30:50.194][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.FC.00.02.51.00.02.31.09.2F.09.31.09.2B.00.00.8A.0F.42.A8.00.00.F0.00.00.03.00.0F.2E.00.05.B5.00.04.E4.00.04.95.02.F2.02.57.03.7F.03.79.13.83.00.01.7E.5F.00.01.7E.5F.00.00.00.00.4E (67)]
+[23:30:50.194][S][sensor]: 'Frequency' >> 49.95 Hz
+[23:30:50.194][S][sensor]: 'RMS voltage phase a' >> 235.1 V
+[23:30:50.194][S][sensor]: 'RMS current phase a' >> 1.020 A
+[23:30:50.194][S][sensor]: 'RMS active power phase a' >> 0.1461 kW
+[23:30:50.194][S][sensor]: 'RMS reactive power phase a' >> -0.0104 kvar
+[23:30:50.194][S][sensor]: 'RMS power factor phase a' >> 0.599 %
+[23:30:50.194][S][sensor]: 'RMS current phase b' >> 0.593 A
+[23:30:50.194][S][sensor]: 'RMS power factor phase b' >> 0.895 %
+[23:30:50.194][S][sensor]: 'RMS current phase c' >> 0.561 A
+[23:30:50.194][S][sensor]: 'RMS active power phase c' >> 0.1173 kW
+[23:30:50.194][S][sensor]: 'RMS reactive power phase c' >> 0.0003 kvar
+[23:30:50.194][S][sensor]: 'RMS power factor phase c' >> 0.889 %
+[23:30:50.194][S][sensor]: 'RMS active power group' >> 0.3886 kW
+[23:30:50.194][S][sensor]: 'RMS reactive power group' >> 0.0138 kvar
+[23:30:50.194][S][sensor]: 'RMS power factor group' >> 0.754 %
+[23:30:50.194][S][sensor]: 'Total active power' >> 0.3868 kW
+[23:30:57.783][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:03.434][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:03.959][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:03.990][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0D.CF.00.00.00.00.00.1E (21)]
+[23:31:03.995][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0D.CF.00.00.00.00.00.1E (21)]
+[23:31:04.526][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:04.526][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:05.192][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.D9.00.01.E0.00.02.32.09.2D.09.31.09.2A.00.00.9B.0F.42.ED.00.01.56.0F.42.4D.00.0D.ED.00.05.B4.00.03.B1.00.04.87.02.EB.02.76.03.43.03.6C.13.82.00.01.7E.5F.00.01.7E.5F.00.00.00.00.57 (67)]
+[23:31:05.192][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.D9.00.01.E0.00.02.32.09.2D.09.31.09.2A.00.00.9B.0F.42.ED.00.01.56.0F.42.4D.00.0D.ED.00.05.B4.00.03.B1.00.04.87.02.EB.02.76.03.43.03.6C.13.82.00.01.7E.5F.00.01.7E.5F.00.00.00.00.57 (67)]
+[23:31:05.193][S][sensor]: 'Frequency' >> 49.94 Hz
+[23:31:05.193][S][sensor]: 'RMS voltage phase a' >> 234.9 V
+[23:31:05.193][S][sensor]: 'RMS current phase a' >> 0.985 A
+[23:31:05.193][S][sensor]: 'RMS active power phase a' >> 0.1460 kW
+[23:31:05.193][S][sensor]: 'RMS reactive power phase a' >> -0.0173 kvar
+[23:31:05.193][S][sensor]: 'RMS power factor phase a' >> 0.630 %
+[23:31:05.193][S][sensor]: 'RMS current phase b' >> 0.480 A
+[23:31:05.193][S][sensor]: 'RMS active power phase b' >> 0.0945 kW
+[23:31:05.193][S][sensor]: 'RMS reactive power phase b' >> 0.0342 kvar
+[23:31:05.193][S][sensor]: 'RMS power factor phase b' >> 0.835 %
+[23:31:05.193][S][sensor]: 'RMS voltage phase c' >> 234.6 V
+[23:31:05.193][S][sensor]: 'RMS current phase c' >> 0.562 A
+[23:31:05.193][S][sensor]: 'RMS active power phase c' >> 0.1159 kW
+[23:31:05.193][S][sensor]: 'RMS reactive power phase c' >> -0.0013 kvar
+[23:31:05.193][S][sensor]: 'RMS power factor phase c' >> 0.876 %
+[23:31:05.193][S][sensor]: 'RMS active power group' >> 0.3565 kW
+[23:31:05.193][S][sensor]: 'RMS reactive power group' >> 0.0155 kvar
+[23:31:05.193][S][sensor]: 'RMS power factor group' >> 0.747 %
+[23:31:05.194][S][sensor]: 'Total active power' >> 0.3535 kW
+[23:31:07.791][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:15.608][I][safe_mode:154]: Boot seems successful; resetting boot loop counter
+[23:31:17.781][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:18.633][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:18.633][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:18.992][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.2F.00.00.00.00.00.7F (21)]
+[23:31:18.995][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.2F.00.00.00.00.00.7F (21)]
+[23:31:19.288][S][sensor]: 'RSSI' >> -52 dBm
+[23:31:19.661][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:19.661][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:20.079][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.DA.00.02.12.00.02.35.09.2E.09.32.09.2B.00.00.AB.0F.42.A4.00.01.2C.0F.42.5D.00.0E.44.00.05.69.00.04.45.00.04.95.02.E9.02.54.03.6B.03.73.13.84.00.01.7E.5F.00.01.7E.5F.00.00.00.00.FB (67)]
+[23:31:20.083][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.DA.00.02.12.00.02.35.09.2E.09.32.09.2B.00.00.AB.0F.42.A4.00.01.2C.0F.42.5D.00.0E.44.00.05.69.00.04.45.00.04.95.02.E9.02.54.03.6B.03.73.13.84.00.01.7E.5F.00.01.7E.5F.00.00.00.00.FB (67)]
+[23:31:20.196][S][sensor]: 'Frequency' >> 49.96 Hz
+[23:31:20.196][S][sensor]: 'RMS voltage phase a' >> 235.0 V
+[23:31:20.196][S][sensor]: 'RMS current phase a' >> 0.986 A
+[23:31:20.196][S][sensor]: 'RMS active power phase a' >> 0.1385 kW
+[23:31:20.196][S][sensor]: 'RMS reactive power phase a' >> -0.0100 kvar
+[23:31:20.196][S][sensor]: 'RMS power factor phase a' >> 0.596 %
+[23:31:20.196][S][sensor]: 'RMS voltage phase b' >> 235.4 V
+[23:31:20.196][S][sensor]: 'RMS current phase b' >> 0.530 A
+[23:31:20.196][S][sensor]: 'RMS active power phase b' >> 0.1093 kW
+[23:31:20.196][S][sensor]: 'RMS reactive power phase b' >> 0.0300 kvar
+[23:31:20.196][S][sensor]: 'RMS power factor phase b' >> 0.875 %
+[23:31:20.196][S][sensor]: 'RMS voltage phase c' >> 234.7 V
+[23:31:20.196][S][sensor]: 'RMS current phase c' >> 0.565 A
+[23:31:20.196][S][sensor]: 'RMS active power phase c' >> 0.1173 kW
+[23:31:20.196][S][sensor]: 'RMS reactive power phase c' >> -0.0029 kvar
+[23:31:20.196][S][sensor]: 'RMS power factor phase c' >> 0.883 %
+[23:31:20.196][S][sensor]: 'RMS active power group' >> 0.3652 kW
+[23:31:20.196][S][sensor]: 'RMS reactive power group' >> 0.0171 kvar
+[23:31:20.196][S][sensor]: 'RMS power factor group' >> 0.745 %
+[23:31:20.196][S][sensor]: 'Total active power' >> 0.3631 kW
+[23:31:27.784][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:33.882][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:33.882][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:33.992][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.3F.00.00.00.00.00.8F (21)]
+[23:31:33.996][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.3F.00.00.00.00.00.8F (21)]
+[23:31:34.528][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:34.528][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:35.194][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.F2.00.02.12.00.02.35.09.2C.09.30.09.2A.00.00.AA.0F.42.A2.00.01.29.0F.42.5D.00.0E.69.00.05.89.00.04.47.00.04.98.02.E8.02.54.03.6C.03.75.13.84.00.01.7E.5F.00.01.7E.5F.00.00.00.00.54 (67)]
+[23:31:35.194][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.F2.00.02.12.00.02.35.09.2C.09.30.09.2A.00.00.AA.0F.42.A2.00.01.29.0F.42.5D.00.0E.69.00.05.89.00.04.47.00.04.98.02.E8.02.54.03.6C.03.75.13.84.00.01.7E.5F.00.01.7E.5F.00.00.00.00.54 (67)]
+[23:31:35.194][S][sensor]: 'RMS voltage phase a' >> 234.8 V
+[23:31:35.195][S][sensor]: 'RMS current phase a' >> 1.010 A
+[23:31:35.195][S][sensor]: 'RMS active power phase a' >> 0.1417 kW
+[23:31:35.195][S][sensor]: 'RMS reactive power phase a' >> -0.0098 kvar
+[23:31:35.195][S][sensor]: 'RMS voltage phase b' >> 235.2 V
+[23:31:35.195][S][sensor]: 'RMS active power phase b' >> 0.1095 kW
+[23:31:35.195][S][sensor]: 'RMS reactive power phase b' >> 0.0297 kvar
+[23:31:35.195][S][sensor]: 'RMS power factor phase b' >> 0.876 %
+[23:31:35.195][S][sensor]: 'RMS voltage phase c' >> 234.6 V
+[23:31:35.195][S][sensor]: 'RMS active power phase c' >> 0.1176 kW
+[23:31:35.195][S][sensor]: 'RMS power factor phase c' >> 0.885 %
+[23:31:35.195][S][sensor]: 'RMS active power group' >> 0.3689 kW
+[23:31:35.195][S][sensor]: 'RMS reactive power group' >> 0.0170 kvar
+[23:31:35.195][S][sensor]: 'RMS power factor group' >> 0.744 %
+[23:31:35.195][S][sensor]: 'Total active power' >> 0.3647 kW
+[23:31:37.789][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:47.793][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:31:48.531][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:48.531][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:31:48.988][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.3C.00.00.00.00.00.8C (21)]
+[23:31:48.991][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.3C.00.00.00.00.00.8C (21)]
+[23:31:49.524][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:49.524][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:31:50.190][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.04.6E.00.02.12.00.02.37.09.2D.09.31.09.2B.00.00.83.0F.42.C4.00.01.2B.0F.42.63.00.0F.48.00.06.6A.00.04.46.00.04.97.02.E8.02.67.03.6B.03.70.13.85.00.01.7E.5F.00.01.7E.5F.00.00.00.00.A7 (67)]
+[23:31:50.190][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.04.6E.00.02.12.00.02.37.09.2D.09.31.09.2B.00.00.83.0F.42.C4.00.01.2B.0F.42.63.00.0F.48.00.06.6A.00.04.46.00.04.97.02.E8.02.67.03.6B.03.70.13.85.00.01.7E.5F.00.01.7E.5F.00.00.00.00.A7 (67)]
+[23:31:50.190][S][sensor]: 'Frequency' >> 49.97 Hz
+[23:31:50.190][S][sensor]: 'RMS voltage phase a' >> 234.9 V
+[23:31:50.190][S][sensor]: 'RMS current phase a' >> 1.134 A
+[23:31:50.190][S][sensor]: 'RMS active power phase a' >> 0.1642 kW
+[23:31:50.190][S][sensor]: 'RMS reactive power phase a' >> -0.0132 kvar
+[23:31:50.190][S][sensor]: 'RMS power factor phase a' >> 0.615 %
+[23:31:50.191][S][sensor]: 'RMS voltage phase b' >> 235.3 V
+[23:31:50.191][S][sensor]: 'RMS active power phase b' >> 0.1094 kW
+[23:31:50.191][S][sensor]: 'RMS reactive power phase b' >> 0.0299 kvar
+[23:31:50.191][S][sensor]: 'RMS power factor phase b' >> 0.875 %
+[23:31:50.191][S][sensor]: 'RMS voltage phase c' >> 234.7 V
+[23:31:50.191][S][sensor]: 'RMS current phase c' >> 0.567 A
+[23:31:50.191][S][sensor]: 'RMS active power phase c' >> 0.1175 kW
+[23:31:50.191][S][sensor]: 'RMS reactive power phase c' >> -0.0035 kvar
+[23:31:50.191][S][sensor]: 'RMS power factor phase c' >> 0.880 %
+[23:31:50.191][S][sensor]: 'RMS active power group' >> 0.3912 kW
+[23:31:50.191][S][sensor]: 'RMS reactive power group' >> 0.0131 kvar
+[23:31:50.191][S][sensor]: 'Total active power' >> 0.3644 kW
+[23:31:57.777][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:00.706][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.5D.00.00.00.00.00.AD (21)]
+[23:32:00.706][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.5F.00.00.0E.5D.00.00.00.00.00.AD (21)]
+[23:32:01.004][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:01.230][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:01.687][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.03.DF.00.02.11.00.02.35.09.31.09.2E.09.2D.00.00.C5.0F.42.AD.00.01.29.00.00.09.00.0E.44.00.05.78.00.04.43.00.04.88.02.E7.02.57.03.6B.03.67.13.85.00.01.7E.60.00.01.7E.60.00.00.00.00.73 (67)]
+[23:32:01.687][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.03.DF.00.02.11.00.02.35.09.31.09.2E.09.2D.00.00.C5.0F.42.AD.00.01.29.00.00.09.00.0E.44.00.05.78.00.04.43.00.04.88.02.E7.02.57.03.6B.03.67.13.85.00.01.7E.60.00.01.7E.60.00.00.00.00.73 (67)]
+[23:32:01.803][S][sensor]: 'Import Aktivnoi Energii' >> 978.88 kWh
+[23:32:01.803][S][sensor]: 'Contract active energy' >> 52066.56 kWh
+[23:32:01.803][S][sensor]: 'RMS voltage phase a' >> 235.3 V
+[23:32:01.803][S][sensor]: 'RMS current phase a' >> 0.991 A
+[23:32:01.803][S][sensor]: 'RMS active power phase a' >> 0.1400 kW
+[23:32:01.804][S][sensor]: 'RMS reactive power phase a' >> -0.0109 kvar
+[23:32:01.804][S][sensor]: 'RMS power factor phase a' >> 0.599 %
+[23:32:01.804][S][sensor]: 'RMS voltage phase b' >> 235.0 V
+[23:32:01.804][S][sensor]: 'RMS current phase b' >> 0.529 A
+[23:32:01.804][S][sensor]: 'RMS active power phase b' >> 0.1091 kW
+[23:32:01.804][S][sensor]: 'RMS reactive power phase b' >> 0.0297 kvar
+[23:32:01.804][S][sensor]: 'RMS voltage phase c' >> 234.9 V
+[23:32:01.804][S][sensor]: 'RMS current phase c' >> 0.565 A
+[23:32:01.804][S][sensor]: 'RMS active power phase c' >> 0.1160 kW
+[23:32:01.804][S][sensor]: 'RMS reactive power phase c' >> 0.0009 kvar
+[23:32:01.804][S][sensor]: 'RMS power factor phase c' >> 0.871 %
+[23:32:01.804][S][sensor]: 'RMS active power group' >> 0.3652 kW
+[23:32:01.804][S][sensor]: 'RMS reactive power group' >> 0.0197 kvar
+[23:32:01.804][S][sensor]: 'RMS power factor group' >> 0.743 %
+[23:32:01.804][S][sensor]: 'Total active power' >> 0.3677 kW
+[23:32:03.755][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:03.755][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:03.996][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.47.00.00.00.00.00.98 (21)]
+[23:32:03.999][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.47.00.00.00.00.00.98 (21)]
+[23:32:04.532][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:04.532][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:05.215][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.04.73.00.02.14.00.02.36.09.30.09.2E.09.2D.00.00.9C.0F.42.C7.00.01.2B.0F.42.47.00.0F.17.00.06.8B.00.04.44.00.04.8C.02.EA.02.70.03.6B.03.69.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.97 (67)]
+[23:32:05.215][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.04.73.00.02.14.00.02.36.09.30.09.2E.09.2D.00.00.9C.0F.42.C7.00.01.2B.0F.42.47.00.0F.17.00.06.8B.00.04.44.00.04.8C.02.EA.02.70.03.6B.03.69.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.97 (67)]
+[23:32:05.215][S][sensor]: 'Frequency' >> 49.96 Hz
+[23:32:05.215][S][sensor]: 'RMS voltage phase a' >> 235.2 V
+[23:32:05.215][S][sensor]: 'RMS current phase a' >> 1.139 A
+[23:32:05.215][S][sensor]: 'RMS active power phase a' >> 0.1675 kW
+[23:32:05.215][S][sensor]: 'RMS reactive power phase a' >> -0.0135 kvar
+[23:32:05.215][S][sensor]: 'RMS power factor phase a' >> 0.624 %
+[23:32:05.215][S][sensor]: 'RMS current phase b' >> 0.532 A
+[23:32:05.215][S][sensor]: 'RMS active power phase b' >> 0.1092 kW
+[23:32:05.215][S][sensor]: 'RMS reactive power phase b' >> 0.0299 kvar
+[23:32:05.215][S][sensor]: 'RMS current phase c' >> 0.566 A
+[23:32:05.215][S][sensor]: 'RMS active power phase c' >> 0.1164 kW
+[23:32:05.215][S][sensor]: 'RMS reactive power phase c' >> -0.0007 kvar
+[23:32:05.216][S][sensor]: 'RMS power factor phase c' >> 0.873 %
+[23:32:05.216][S][sensor]: 'RMS active power group' >> 0.3863 kW
+[23:32:05.216][S][sensor]: 'RMS reactive power group' >> 0.0156 kvar
+[23:32:05.216][S][sensor]: 'RMS power factor group' >> 0.746 %
+[23:32:05.216][S][sensor]: 'Total active energy ' >> 978.88 kWh
+[23:32:05.216][S][sensor]: 'Total active power' >> 0.3655 kW
+[23:32:07.779][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:17.783][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:18.880][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:18.880][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:18.980][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0F.A5.00.00.00.00.00.F7 (21)]
+[23:32:18.983][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0F.A5.00.00.00.00.00.F7 (21)]
+[23:32:19.289][S][sensor]: 'RSSI' >> -50 dBm
+[23:32:19.905][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:19.905][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:20.069][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.04.15.00.02.0E.00.02.35.09.31.09.2E.09.2E.00.00.BE.0F.42.A9.00.01.27.00.00.00.00.0E.84.00.05.B5.00.04.44.00.04.89.02.E2.02.51.03.72.03.69.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.0E (67)]
+[23:32:20.071][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.04.15.00.02.0E.00.02.35.09.31.09.2E.09.2E.00.00.BE.0F.42.A9.00.01.27.00.00.00.00.0E.84.00.05.B5.00.04.44.00.04.89.02.E2.02.51.03.72.03.69.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.0E (67)]
+[23:32:20.183][S][sensor]: 'RMS voltage phase a' >> 235.3 V
+[23:32:20.183][S][sensor]: 'RMS current phase a' >> 1.045 A
+[23:32:20.183][S][sensor]: 'RMS active power phase a' >> 0.1461 kW
+[23:32:20.183][S][sensor]: 'RMS reactive power phase a' >> -0.0105 kvar
+[23:32:20.184][S][sensor]: 'RMS power factor phase a' >> 0.593 %
+[23:32:20.184][S][sensor]: 'RMS current phase b' >> 0.526 A
+[23:32:20.184][S][sensor]: 'RMS reactive power phase b' >> 0.0295 kvar
+[23:32:20.184][S][sensor]: 'RMS power factor phase b' >> 0.882 %
+[23:32:20.184][S][sensor]: 'RMS voltage phase c' >> 235.0 V
+[23:32:20.184][S][sensor]: 'RMS current phase c' >> 0.565 A
+[23:32:20.184][S][sensor]: 'RMS active power phase c' >> 0.1161 kW
+[23:32:20.184][S][sensor]: 'RMS reactive power phase c' >> 0.0000 kvar
+[23:32:20.184][S][sensor]: 'RMS active power group' >> 0.3716 kW
+[23:32:20.184][S][sensor]: 'RMS reactive power group' >> 0.0190 kvar
+[23:32:20.184][S][sensor]: 'RMS power factor group' >> 0.738 %
+[23:32:20.184][S][sensor]: 'Total active power' >> 0.4005 kW
+[23:32:27.785][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:33.579][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:33.579][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:33.979][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.65.00.00.00.00.00.B6 (21)]
+[23:32:33.983][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.65.00.00.00.00.00.B6 (21)]
+[23:32:34.516][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:34.516][D][SmWisen:094]: Received: FRAME=[48.06.02.00.0A.5A (6)]
+[23:32:35.104][D][SmWisen:094]: Received: FRAME=[48.43.01.01.0B.00.04.19.00.02.10.00.02.31.09.32.09.2E.09.2F.00.00.BB.0F.42.AF.00.01.2A.00.00.01.00.0E.90.00.05.CD.00.04.42.00.04.7F.02.E4.02.58.03.6D.03.67.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.33 (67)]
+[23:32:35.104][D][SmWisen:267]: Sending: FRAME=[48.43.01.01.0B.00.04.19.00.02.10.00.02.31.09.32.09.2E.09.2F.00.00.BB.0F.42.AF.00.01.2A.00.00.01.00.0E.90.00.05.CD.00.04.42.00.04.7F.02.E4.02.58.03.6D.03.67.13.84.00.01.7E.60.00.01.7E.60.00.00.00.00.33 (67)]
+[23:32:35.185][S][sensor]: 'RMS voltage phase a' >> 235.4 V
+[23:32:35.185][S][sensor]: 'RMS current phase a' >> 1.049 A
+[23:32:35.185][S][sensor]: 'RMS active power phase a' >> 0.1485 kW
+[23:32:35.185][S][sensor]: 'RMS reactive power phase a' >> -0.0111 kvar
+[23:32:35.185][S][sensor]: 'RMS power factor phase a' >> 0.600 %
+[23:32:35.185][S][sensor]: 'RMS current phase b' >> 0.528 A
+[23:32:35.185][S][sensor]: 'RMS active power phase b' >> 0.1090 kW
+[23:32:35.186][S][sensor]: 'RMS reactive power phase b' >> 0.0298 kvar
+[23:32:35.186][S][sensor]: 'RMS power factor phase b' >> 0.877 %
+[23:32:35.186][S][sensor]: 'RMS voltage phase c' >> 235.1 V
+[23:32:35.186][S][sensor]: 'RMS current phase c' >> 0.561 A
+[23:32:35.186][S][sensor]: 'RMS active power phase c' >> 0.1151 kW
+[23:32:35.186][S][sensor]: 'RMS reactive power phase c' >> 0.0001 kvar
+[23:32:35.186][S][sensor]: 'RMS power factor phase c' >> 0.871 %
+[23:32:35.186][S][sensor]: 'RMS active power group' >> 0.3728 kW
+[23:32:35.186][S][sensor]: 'RMS reactive power group' >> 0.0187 kvar
+[23:32:35.186][S][sensor]: 'RMS power factor group' >> 0.740 %
+[23:32:35.186][S][sensor]: 'Total active power' >> 0.3685 kW
+[23:32:37.797][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:47.784][S][sensor]: 'ESP Voltage' >> 3.31 V
+[23:32:48.728][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:48.728][D][SmWisen:094]: Received: FRAME=[48.06.02.00.00.50 (6)]
+[23:32:48.981][D][SmWisen:094]: Received: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.AF.00.00.00.00.00.00 (21)]
+[23:32:48.984][D][SmWisen:267]: Sending: FRAME=[48.15.01.01.01.03.01.00.01.7E.60.00.00.0E.AF.00.00.00.00.00.00 (21)]
+[23:32:49.753][D][SmWisen:267]: Sending: FRAME=[48.06.02.00.0A.5A (6)]
