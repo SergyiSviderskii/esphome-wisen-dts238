@@ -1,0 +1,312 @@
+type: horizontal-stack
+cards:
+  - type: vertical-stack
+    cards:
+      - type: tile
+        entity: sensor.dom_veranda_monitor_obshchii_esphome_version
+        name: SM METR
+        color: red
+        show_entity_picture: false
+        vertical: true
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        features_position: bottom
+      - type: horizontal-stack
+        cards:
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: sensor.dom_veranda_monitor_obshchii_ssid
+            icon_height: 20px
+            show_state: true
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: none
+            show_state: true
+            entity: sensor.dom_veranda_monitor_obshchii_access_point
+            icon_height: 20px
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: none
+            entity: sensor.dom_veranda_monitor_obshchii_ip
+            icon_height: 20px
+            show_state: true
+      - type: horizontal-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: switch.dom_veranda_monitor_obshchii_setting
+                state: 'off'
+            card:
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              entity: switch.dom_veranda_monitor_obshchii_detail
+              name: detail
+              icon_height: 20px
+              hold_action:
+                action: toggle
+          - type: conditional
+            conditions:
+              - entity: switch.dom_veranda_monitor_obshchii_setting
+                state: 'off'
+              - entity: switch.dom_veranda_monitor_obshchii_detail
+                state: 'off'
+            card:
+              show_name: false
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              entity: sensor.dom_veranda_monitor_obshchii_rssi
+              icon_height: 20px
+              hold_action:
+                action: none
+              show_state: true
+          - type: conditional
+            conditions:
+              - entity: switch.dom_veranda_monitor_obshchii_setting
+                state: 'off'
+              - entity: switch.dom_veranda_monitor_obshchii_detail
+                state: 'off'
+            card:
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              entity: switch.dom_veranda_monitor_obshchii_reset
+              icon_height: 20px
+              hold_action:
+                action: toggle
+              show_state: false
+              name: reset
+      - type: conditional
+        conditions:
+          - entity: switch.dom_veranda_monitor_obshchii_detail
+            state: 'off'
+          - entity: switch.dom_veranda_monitor_obshchii_setting
+            state: 'off'
+        card:
+          type: vertical-stack
+          cards:
+            - type: gauge
+              min: 0
+              max: 20
+              needle: true
+              severity:
+                green: 1
+                yellow: 10
+                red: 13
+              name:
+                type: entity
+              entity: sensor.dom_veranda_monitor_obshchii_summarnaia_aktivnaia_moshchnost
+            - type: horizontal-stack
+              cards:
+                - show_name: false
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: none
+                  icon_height: 20px
+                  show_state: true
+                  entity: sensor.dom_veranda_monitor_obshchii_time_work
+                - show_name: false
+                  show_icon: true
+                  show_state: true
+                  type: glance
+                  entities:
+                    - entity: sensor.dom_veranda_monitor_obshchii_summarnaia_aktivnaia_energiia
+                - show_name: false
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: none
+                  entity: switch.dom_veranda_monitor_obshchii_lock
+                  show_state: true
+                  hold_action:
+                    action: toggle
+                  icon_height: 20px
+      - type: horizontal-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: switch.dom_veranda_monitor_obshchii_setting
+                state: 'off'
+              - entity: switch.dom_veranda_monitor_obshchii_detail
+                state: 'off'
+            card:
+              show_name: false
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              entity: switch.dom_veranda_monitor_obshchii_on_off
+              icon_height: 20px
+              hold_action:
+                action: toggle
+              show_state: true
+          - type: conditional
+            conditions:
+              - entity: switch.dom_veranda_monitor_obshchii_detail
+                state: 'off'
+            card:
+              type: vertical-stack
+              cards:
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: none
+                  entity: switch.dom_veranda_monitor_obshchii_setting
+                  icon_height: 20px
+                  hold_action:
+                    action: toggle
+                  show_state: false
+                  name: setting
+      - type: conditional
+        conditions:
+          - entity: switch.dom_veranda_monitor_obshchii_detail
+            state: 'on'
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_import_aktivnoi_energii
+                  name:
+                    type: entity
+                - entity: sensor.dom_veranda_monitor_obshchii_export_active_energy
+                  name:
+                    type: entity
+                - entity: sensor.dom_veranda_monitor_obshchii_contract_active_energy
+                  name:
+                    type: entity
+                - entity: sensor.dom_veranda_monitor_obshchii_frequency
+            - show_name: true
+              show_icon: false
+              type: button
+              tap_action:
+                action: none
+              name: A phase
+              hold_action:
+                action: none
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_voltage_phase_a
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_current_phase_a
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_active_power_phase_a
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_reactive_power_phase_a
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_power_factor_phase_a
+            - show_name: true
+              show_icon: false
+              type: button
+              tap_action:
+                action: none
+              name: B phase
+              hold_action:
+                action: none
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_voltage_phase_b
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_current_phase_b
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_active_power_phase_b
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_reactive_power_phase_b
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_power_factor_phase_b
+            - show_name: true
+              show_icon: false
+              type: button
+              tap_action:
+                action: none
+              name: C phase
+              hold_action:
+                action: none
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_voltage_phase_c
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_current_phase_c
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_active_power_phase_c
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_reactive_power_phase_c
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_power_factor_phase_c
+            - show_name: true
+              show_icon: false
+              type: button
+              tap_action:
+                action: none
+              name: Group
+              hold_action:
+                action: none
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_active_power_group
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_reactive_power_group
+                - entity: sensor.dom_veranda_monitor_obshchii_rms_power_factor_group
+      - type: conditional
+        conditions:
+          - entity: switch.dom_veranda_monitor_obshchii_setting
+            state: 'on'
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - entity: number.dom_veranda_monitor_obshchii_voltage_high_v
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_voltage_low_v
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_current_high_a
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_the_starting_kwh_value_of_meter_kwh
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_metr_price
+            - show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              name: save
+              icon_height: 20px
+              hold_action:
+                action: toggle
+              entity: switch.dom_veranda_monitor_obshchii_save_protec_energy_initial
+            - type: entities
+              entities:
+                - entity: sensor.dom_veranda_monitor_obshchii_purchase_value
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_purchase_kwh
+                  name:
+                    type: entity
+                - entity: sensor.dom_veranda_monitor_obshchii_balance_kwh
+                  name:
+                    type: entity
+                - entity: number.dom_veranda_monitor_obshchii_setting_balance_alarm_kwh
+                  name:
+                    type: entity
+                - entity: switch.dom_veranda_monitor_obshchii_prepayment_fuction
+                  name:
+                    type: entity
+            - show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: none
+              entity: switch.dom_veranda_monitor_obshchii_save_prepayment
+              icon_height: 20px
+              hold_action:
+                action: toggle
+              name: save

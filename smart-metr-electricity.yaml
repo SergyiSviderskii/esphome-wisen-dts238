@@ -1,0 +1,745 @@
+# electric meter DTS-238-7 WISEN integration homeassistant
+substitutions:
+  hostname: smart-metr-electricity  
+  friendly_name: "⚡📟 Монитор Общий"
+  password_ota: "b404e8dea9d7179332d87da4e2bfa49e"
+  installation_area: "дом - веранда"
+  esp8266_board: esp01_1m
+  logger_baud_rate: 0  
+  reboot_timeout: "15min"
+  status_led: 14
+  status_inverted: true   
+  internal_light_mode: false   
+  restore_from_flash: true
+
+packages:
+  - !include device/common/esp8266/sensor_vcc_esp.yaml
+  - !include device/common/esp8266/board.yaml
+  - !include device/common/general/api.yaml    
+  - !include device/common/general/only_time.yaml  
+  - !include device/common/general/wifi_wpa2.yaml 
+  - !include device/common/general/status_led.yaml
+  - !include device/common/general/script_service_ha.yaml  
+  - !include device/common/general/components.yaml    
+
+esphome:
+  name: $hostname
+  friendly_name: $friendly_name  
+  area: $installation_area
+  on_boot:
+    priority: 600
+    then:
+      - text_sensor.template.publish:
+          id: point_bssid
+          state: "Нет данных"   
+      - text_sensor.template.publish:
+          id: bssid_point
+          state: "Нет данных"   
+    
+uart:
+  - tx_pin: 1
+    rx_pin: 3
+    baud_rate: 9600
+    
+          
+globals:
+  - id: electricity_consumption_supplier_meter
+    type: float
+    restore_value: true
+  - id: pricekWh
+    type: float
+    restore_value: true    
+
+binary_sensor:
+  - platform: gpio
+    id: power_on
+    pin:
+      number: GPIO13
+      mode:
+        input: true
+        pullup: true
+    on_release:
+      then:
+        - lambda: |-   
+            id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = std::vector<uint8_t>{0x48, 0x07, 0x02, 0x00, 0x09, 0x01}});    
+        - script.execute:
+            id: service_ha
+            message_data: "🟢 Включена"
+            title_data: "⚡📟Электрический счётчик дом - веранда"      
+    internal: true
+    
+    
+external_components:
+  - source:
+      type: local
+      path: components/my_components/my_wisen
+    refresh: 1d
+    components: all     
+    
+    
+smdst2387: 
+  id: uart_smdts2387
+  
+ 
+script:
+  - id: script_pass             
+    then:  
+      lambda: |- 
+
+        if (id(setting).state || id(save_protec_energy_initial).state || id(save_prepayment).state) { 
+          if (id(voltage_high_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [0])
+            id(voltage_high_limit).publish_state((float)id(uart_smdts2387).limitanddatapurcha [0]);
+          if (id(voltage_low_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [1])  
+            id(voltage_low_limit).publish_state((float)id(uart_smdts2387).limitanddatapurcha [1]);
+          if (id(current_high_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [2] * 0.01)  
+            id(current_high_limit).publish_state((float)id(uart_smdts2387).limitanddatapurcha [2] * 0.01);
+          if (id(starting_kWh_value).state != (float)id(electricity_consumption_supplier_meter)) 
+            id(starting_kWh_value).publish_state((float)id(electricity_consumption_supplier_meter));   
+          if (id(metr_price).state != (float)id(pricekWh)) 
+            id(metr_price).publish_state((float)id(pricekWh)); 
+            
+          if (id(save_protec_energy_initial).state)   
+            id(save_protec_energy_initial).turn_off(); 
+            
+          if (id(prepayment_purchase_kWh).state != (float)id(uart_smdts2387).limitanddatapurcha [3] * 0.01) 
+            id(prepayment_purchase_kWh).publish_state((float)id(uart_smdts2387).limitanddatapurcha [3] * 0.01);  
+          if (id(prepayment_purchases_setting_balance_kWh).state != (float)id(uart_smdts2387).limitanddatapurcha [4] * 0.01) 
+            id(prepayment_purchases_setting_balance_kWh).publish_state((float)id(uart_smdts2387).limitanddatapurcha [4] * 0.01);            
+          if (id(prepayment_purchases_setting_balance_alarm_kWh).state != (float)id(uart_smdts2387).limitanddatapurcha [5] * 0.01) 
+            id(prepayment_purchases_setting_balance_alarm_kWh).publish_state((float)id(uart_smdts2387).limitanddatapurcha [5] * 0.01);  
+          
+          id(prepayment_purchase_value).publish_state(id(prepayment_purchases_setting_balance_kWh).state * id(pricekWh));    
+          
+          if (id(save_prepayment).state) 
+            id(save_prepayment).turn_off();  
+            
+        }   
+        
+        if (id(import_active_energy).state != (float)(id(uart_smdts2387).measurement[0] * 0.01))         
+          id(import_active_energy).publish_state((float)(id(uart_smdts2387).measurement[0] * 0.01)); 
+        if (id(reset).state) 
+          id(reset).turn_off();  
+        if (id(export_active_energy).state != (float)(id(uart_smdts2387).measurement[1] * 0.01))  
+          id(export_active_energy).publish_state((float)(id(uart_smdts2387).measurement[1] * 0.01));  
+        if (id(contract_active_energy).state != (float)(id(uart_smdts2387).measurement[2] * 0.01 + id(electricity_consumption_supplier_meter)))   
+          id(contract_active_energy).publish_state((float)(id(uart_smdts2387).measurement[2] * 0.01 + id(electricity_consumption_supplier_meter)));
+        if (id(frequency).state != (float)(id(uart_smdts2387).measurement[3] * 0.01))  
+          id(frequency).publish_state((float)(id(uart_smdts2387).measurement[3] * 0.01));  
+        
+        if (id(rms_voltage_phase_a).state != (float)(id(uart_smdts2387).measurement[4] * 0.1)) 
+          id(rms_voltage_phase_a).publish_state((float)(id(uart_smdts2387).measurement[4] * 0.1));
+        if (id(rms_current_phase_a).state != (float)(id(uart_smdts2387).measurement[5] * 0.001))
+          id(rms_current_phase_a).publish_state((float)(id(uart_smdts2387).measurement[5] * 0.001));
+        if (id(rms_active_power_phase_a).state != (float)(id(uart_smdts2387).measurement[6] * 0.0001))
+          id(rms_active_power_phase_a).publish_state((float)(id(uart_smdts2387).measurement[6] * 0.0001));
+        if (id(rms_reactive_power_phase_a).state != (float)(id(uart_smdts2387).measurement[7] * 0.0001))  
+          id(rms_reactive_power_phase_a).publish_state((float)(id(uart_smdts2387).measurement[7] * 0.0001));
+        if (id(rms_power_factor_phase_a).state != (float)(id(uart_smdts2387).measurement[8] * 0.001))  
+          id(rms_power_factor_phase_a).publish_state((float)(id(uart_smdts2387).measurement[8] * 0.001));   
+        
+        if (id(rms_voltage_phase_b).state != (float)(id(uart_smdts2387).measurement[9] * 0.1))
+          id(rms_voltage_phase_b).publish_state((float)(id(uart_smdts2387).measurement[9] * 0.1)); 
+        if (id(rms_current_phase_b).state != (float)(id(uart_smdts2387).measurement[10] * 0.001))
+          id(rms_current_phase_b).publish_state((float)(id(uart_smdts2387).measurement[10] * 0.001));
+        if (id(rms_active_power_phase_b).state != (float)(id(uart_smdts2387).measurement[11] * 0.0001))
+          id(rms_active_power_phase_b).publish_state((float)(id(uart_smdts2387).measurement[11] * 0.0001));
+        if (id(rms_reactive_power_phase_b).state != (float)(id(uart_smdts2387).measurement[12] * 0.0001))  
+          id(rms_reactive_power_phase_b).publish_state((float)(id(uart_smdts2387).measurement[12] * 0.0001));
+        if (id(rms_power_factor_phase_b).state != (float)(id(uart_smdts2387).measurement[13] * 0.001))  
+          id(rms_power_factor_phase_b).publish_state((float)(id(uart_smdts2387).measurement[13] * 0.001));          
+        
+        
+        if (id(rms_voltage_phase_c).state != (float)(id(uart_smdts2387).measurement[14] * 0.1))
+          id(rms_voltage_phase_c).publish_state((float)(id(uart_smdts2387).measurement[14] * 0.1)); 
+        if (id(rms_current_phase_c).state != (float)(id(uart_smdts2387).measurement[15] * 0.001))
+          id(rms_current_phase_c).publish_state((float)(id(uart_smdts2387).measurement[15] * 0.001));
+        if (id(rms_active_power_phase_c).state != (float)(id(uart_smdts2387).measurement[16] * 0.0001))
+          id(rms_active_power_phase_c).publish_state((float)(id(uart_smdts2387).measurement[16] * 0.0001));
+        if (id(rms_reactive_power_phase_c).state != (float)(id(uart_smdts2387).measurement[17] * 0.0001))  
+          id(rms_reactive_power_phase_c).publish_state((float)(id(uart_smdts2387).measurement[17] * 0.0001));
+        if (id(rms_power_factor_phase_c).state != (float)(id(uart_smdts2387).measurement[18] * 0.001))  
+          id(rms_power_factor_phase_c).publish_state((float)(id(uart_smdts2387).measurement[18] * 0.001));           
+       
+        if (id(rms_active_power_g).state != (float)(id(uart_smdts2387).measurement[19] * 0.0001))
+          id(rms_active_power_g).publish_state((float)(id(uart_smdts2387).measurement[19] * 0.0001));
+        if (id(rms_reactive_power_g).state != (float)(id(uart_smdts2387).measurement[20] * 0.0001))  
+          id(rms_reactive_power_g).publish_state((float)(id(uart_smdts2387).measurement[20] * 0.0001));
+        if (id(rms_power_factor_g).state != (float)(id(uart_smdts2387).measurement[21] * 0.001))  
+          id(rms_power_factor_g).publish_state((float)(id(uart_smdts2387).measurement[21] * 0.001));  
+          
+        // if (id(power).state != (int)(id(uart_smdts2387).powerandtotal[0]))  
+        //      id(power).publish_state((int)(id(uart_smdts2387).powerandtotal[0]));  
+        
+        if (id(total_active_energy).state != (float)(id(uart_smdts2387).powerandtotal[1] * 0.01))  
+          id(total_active_energy).publish_state((float)(id(uart_smdts2387).powerandtotal[1] * 0.01));
+        if (id(total_active_power).state != (float)(id(uart_smdts2387).powerandtotal[2] * 0.0001))
+          id(total_active_power).publish_state((float)(id(uart_smdts2387).powerandtotal[2] * 0.0001));        
+          
+        id(uart_smdts2387).trigger_pass = false;  
+
+  - id: script_lock_on
+    mode: restart 
+    then:
+      - delay: 60000ms   
+      - switch.turn_on: lock
+      
+  - id: script_off
+    then:
+      - if:     
+          condition:  
+            switch.is_on: detail
+          then:  
+            switch.turn_off: detail   
+      - if:     
+          condition:  
+            switch.is_on: setting
+          then:  
+            switch.turn_off: setting   
+      - if:     
+          condition:  
+            switch.is_on: reset
+          then:  
+            switch.turn_off: reset   
+      - if:     
+          condition:  
+            switch.is_on: save_protec_energy_initial 
+          then:  
+            switch.turn_off: save_protec_energy_initial   
+      - if:     
+          condition:  
+            switch.is_on: save_prepayment
+          then:  
+            switch.turn_off: save_prepayment             
+                    
+switch:
+  - platform: template
+    id: pass 
+    restore_mode: ALWAYS_OFF
+    lambda: |-
+      if (id(uart_smdts2387).trigger_pass) {
+        return true;
+      } else {
+        return false;
+      }      
+    on_turn_on:  
+      then:
+        - script.execute: script_pass 
+    optimistic: true 
+    
+  - platform: template    
+    name: "ON-OFF"
+    id: power
+    icon: mdi:power-standby
+    lambda: |-
+      if (id(uart_smdts2387).powerandtotal[0] == 0) return false;
+      return (bool)id(uart_smdts2387).powerandtotal[0]; 
+  
+    # 2. Действие при клике пользователем на "Включить"
+    turn_on_action:
+      - if:     
+          condition:
+            and:
+              - switch.is_off: lock
+              - lambda: |-
+                  return (millis() >= 3000 && id(uart_smdts2387).powerandtotal[0] == 0); 
+          then:
+            - script.execute: script_lock_on              
+            - lambda: |-
+                // Шлем в UART команду строго на включение (0x01 на конце фрейма)
+                id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = std::vector<uint8_t>{0x48, 0x07, 0x02, 0x00, 0x09, 0x01}});  
+            - script.execute:
+                id: service_ha
+                message_data: "🔴 Включить"
+                title_data: "⚡📟Электрический счётчик дом - веранда"   
+
+    # 3. Действие при клике пользователем на "Выключить"
+    turn_off_action:
+      - if:     
+          condition:
+            and:
+              - switch.is_off: lock
+              - lambda: |-
+                  return (millis() >= 3000 && id(uart_smdts2387).powerandtotal[0] == 1);  
+          then:
+            - script.execute: script_lock_on              
+            - lambda: |-
+                // Шлем в UART команду строго на выключение (0x00 на конце фрейма)
+                id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = std::vector<uint8_t>{0x48, 0x07, 0x02, 0x00, 0x09, 0x00}});  
+            - script.execute:
+                id: service_ha
+                message_data: "🟢 Включена"
+                title_data: "⚡📟Электрический счётчик дом - веранда"                         
+                  
+  - platform: template    
+    name: "Lock"
+    id: lock
+    icon: mdi:lock         
+    restore_mode: ALWAYS_ON
+    on_turn_on:  
+      then:         
+        - if:     
+            condition:  
+              switch.is_on: detail
+            then:  
+              switch.turn_off: detail  
+        - if:     
+            condition:  
+              switch.is_on: setting
+            then:  
+              switch.turn_off: setting                     
+    on_turn_off: 
+      then:
+        - script.execute: script_lock_on            
+    optimistic: true    
+    
+  - platform: template
+    name: "Detail" 
+    id: detail
+    icon: mdi:form-select
+    restore_mode: ALWAYS_OFF
+    on_turn_on:  
+      then:
+        - if:     
+            condition:
+              or:
+                - switch.is_on: lock
+                - switch.is_on: reset
+                - switch.is_on: setting
+            then: 
+              script.execute: script_off
+            else:
+              script.execute: script_lock_on 
+    optimistic: true 
+
+  - platform: template    
+    name: "Reset"
+    id: reset
+    icon: mdi:tray-remove
+    restore_mode: ALWAYS_OFF   
+    on_turn_on:  
+        - if:     
+            condition:
+              and:
+                - switch.is_off: lock
+                - switch.is_off: detail
+                - switch.is_off: setting
+            then:
+              - script.execute: script_lock_on              
+              - lambda: |-
+                  id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = std::vector<uint8_t>{0x48, 0x12, 0x02, 0x00, 0x05, 0x00, 0x00, \
+                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}});  
+              - script.execute:
+                  id: service_ha
+                  message_data: "🔁⚡️Сброс показаний общей активной энергии в ноль"
+                  title_data: "⚡📟Электрический счётчик дом - веранда"                   
+            else:
+              script.execute: script_off
+    optimistic: true 
+    
+  - platform: template    
+    name: "Setting" 
+    id: setting
+    icon: mdi:cog-refresh
+    restore_mode: ALWAYS_OFF 
+    on_turn_on:  
+      then:
+        - if:     
+            condition:
+              or:
+                - switch.is_on: lock
+                - switch.is_on: reset
+                - switch.is_on: detail
+            then: 
+              script.execute: script_off
+            else:
+              - script.execute: script_lock_on     
+              - lambda: |-
+                  id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = std::vector<uint8_t>{0x48, 0x06, 0x02, 0x00, 0x02}});                  
+    optimistic: true 
+    
+  - platform: template    
+    name: "Save protec energy initial"
+    id: save_protec_energy_initial
+    icon: mdi:tray-arrow-up 
+    restore_mode: ALWAYS_OFF
+    on_turn_on:  
+      then:
+        - if:     
+            condition:
+              or:
+                - switch.is_on: lock
+                - switch.is_on: reset
+                - switch.is_on: detail            
+                - switch.is_off: setting
+                - switch.is_on: save_prepayment                
+            then: 
+              script.execute: script_off            
+            else:
+              - lambda: |- 
+                  if (id(starting_kWh_value).state != (float)id(electricity_consumption_supplier_meter)) 
+                    id(electricity_consumption_supplier_meter) = id(starting_kWh_value).state; 
+                  if (id(metr_price).state != (float)id(pricekWh)) 
+                    id(pricekWh) = id(metr_price).state; 
+ 
+                  if (id(voltage_high_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [0] || \
+                    id(voltage_low_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [1] || \
+                    id(current_high_limit).state != (float)id(uart_smdts2387).limitanddatapurcha [2] * 0.01) {  
+                      
+                    uint8_t current_high_limit_input_ = (uint16_t)(id(current_high_limit).state * 100) >> 8;
+                    uint8_t current_high_limit_input__ = (uint16_t)(id(current_high_limit).state * 100);
+                    uint8_t voltage_high_limit_input_ = (uint16_t)id(voltage_high_limit).state >> 8;
+                    uint8_t voltage_high_limit_input__ = (uint8_t)id(voltage_high_limit).state;
+                    uint8_t voltage_low_limit_input__ = (uint8_t)id(voltage_low_limit).state;
+           
+                    id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = {0x48, 0x0C, 0x02, 0x00, 0x03, \
+                    current_high_limit_input_, current_high_limit_input__, voltage_high_limit_input_, voltage_high_limit_input__, 0x00, voltage_low_limit_input__}});
+                    }
+              - script.execute: script_lock_on              
+    optimistic: true 
+
+  - platform: template    
+    name: "Prepayment fuction"  
+    id: sm_metr_prepayment_fuction
+    lambda: |-
+      if (id(uart_smdts2387).limitanddatapurcha[0] == 0) return false;
+      return (bool)id(uart_smdts2387).limitanddatapurcha [6];
+    optimistic: true       
+    
+  - platform: template    
+    name: "Save prepayment"
+    id: save_prepayment
+    icon: mdi:tray-arrow-up
+    restore_mode: ALWAYS_OFF 
+    on_turn_on:  
+      then:
+        - if:     
+            condition:
+              or:
+                - switch.is_on: lock
+                - switch.is_on: reset
+                - switch.is_on: detail            
+                - switch.is_off: setting
+                - switch.is_on: save_protec_energy_initial  
+            then: 
+              script.execute: script_off            
+            else:
+              - lambda: |- 
+              
+                  if ((id(prepayment_purchase_kWh).state != (float)id(uart_smdts2387).limitanddatapurcha [3]) || \
+                      (id(prepayment_purchases_setting_balance_alarm_kWh).state != (float)id(uart_smdts2387).limitanddatapurcha [4]) || \
+                      (id(sm_metr_prepayment_fuction).state != (int)id(uart_smdts2387).limitanddatapurcha [6])) {
+                      
+                    uint8_t purchase_kWh_ = (uint32_t)(id(prepayment_purchase_kWh).state * 100) >> 24;
+                    uint8_t purchase_kWh__ = (uint32_t)(id(prepayment_purchase_kWh).state * 100)>> 16;
+                    uint8_t purchase_kWh___ = (uint32_t)(id(prepayment_purchase_kWh).state * 100) >> 8;
+                    uint8_t purchase_kWh____ = (uint32_t)(id(prepayment_purchase_kWh).state * 100);          
+      
+                    uint8_t setting_balance_alarm_kWh_ = (uint32_t)(id(prepayment_purchases_setting_balance_alarm_kWh).state * 100) >> 24;
+                    uint8_t setting_balance_alarm_kWh__ = (uint32_t)(id(prepayment_purchases_setting_balance_alarm_kWh).state * 100) >> 16;
+                    uint8_t setting_balance_alarm_kWh___ = (uint32_t)(id(prepayment_purchases_setting_balance_alarm_kWh).state * 100) >> 8;
+                    uint8_t setting_balance_alarm_kWh____ = (uint32_t)(id(prepayment_purchases_setting_balance_alarm_kWh).state * 100);  
+              
+                    id(uart_smdts2387).send_command(smdst2387::Smdst2387Command{.payload = {0x48, 0x0C, 0x02, 0x00, 0x0D, 
+                    purchase_kWh_, purchase_kWh__, purchase_kWh___, purchase_kWh____, 
+                    setting_balance_alarm_kWh_, setting_balance_alarm_kWh__, setting_balance_alarm_kWh___, setting_balance_alarm_kWh____, (uint8_t)id(sm_metr_prepayment_fuction).state}});
+                    }
+              - script.execute: script_lock_on              
+    optimistic: true 
+
+sensor:  
+  - platform: template
+    name: "Import Aktivnoi Energii"
+    id: import_active_energy
+    device_class: energy
+    unit_of_measurement: kWh
+    state_class: total
+    icon: mdi:transmission-tower-import
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: template    
+    name: "Export active energy"
+    id: export_active_energy
+    device_class: energy
+    unit_of_measurement: kWh
+    state_class: total
+    icon: mdi:transmission-tower-export
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: template    
+    name: "Contract active energy"
+    id: contract_active_energy
+    device_class: energy
+    unit_of_measurement: kWh
+    state_class: total
+    accuracy_decimals: 2 
+    update_interval: never
+  - platform: template     
+    name: "Frequency"
+    id: frequency
+    device_class: frequency 
+    unit_of_measurement: Hz
+    state_class: measurement 
+    accuracy_decimals: 2 
+    update_interval: never
+    
+  - platform: template   
+    name: "RMS voltage phase a"
+    id: rms_voltage_phase_a
+    device_class: voltage
+    unit_of_measurement: V
+    state_class: measurement 
+    accuracy_decimals: 1 
+    update_interval: never
+  - platform: template    
+    name: "RMS current phase a"
+    id: rms_current_phase_a
+    device_class: current
+    unit_of_measurement: A    
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never
+  - platform: template    
+    name: "RMS active power phase a"
+    id: rms_active_power_phase_a
+    device_class: power
+    unit_of_measurement: kW  
+    state_class: measurement  
+    accuracy_decimals: 4 
+    update_interval: never
+  - platform: template    
+    name: "RMS reactive power phase a"
+    id: rms_reactive_power_phase_a
+    device_class: reactive_power
+    unit_of_measurement: kvar
+    state_class: measurement  
+    accuracy_decimals: 4
+    update_interval: never
+  - platform: template    
+    name: "RMS power factor phase a"
+    id: rms_power_factor_phase_a
+    device_class: power_factor
+    unit_of_measurement: "%"
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never
+    
+  - platform: template   
+    name: "RMS voltage phase b"
+    id: rms_voltage_phase_b
+    device_class: voltage
+    unit_of_measurement: V
+    state_class: measurement 
+    accuracy_decimals: 1 
+    update_interval: never
+  - platform: template    
+    name: "RMS current phase b"
+    id: rms_current_phase_b
+    device_class: current
+    unit_of_measurement: A    
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never
+  - platform: template    
+    name: "RMS active power phase b"
+    id: rms_active_power_phase_b
+    device_class: power
+    unit_of_measurement: kW  
+    state_class: measurement  
+    accuracy_decimals: 4 
+    update_interval: never
+  - platform: template    
+    name: "RMS reactive power phase b"
+    id: rms_reactive_power_phase_b
+    device_class: reactive_power
+    unit_of_measurement: kvar
+    state_class: measurement  
+    accuracy_decimals: 4
+    update_interval: never
+  - platform: template    
+    name: "RMS power factor phase b"
+    id: rms_power_factor_phase_b
+    device_class: power_factor
+    unit_of_measurement: "%"
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never   
+    
+  - platform: template   
+    name: "RMS voltage phase c"
+    id: rms_voltage_phase_c
+    device_class: voltage
+    unit_of_measurement: V
+    state_class: measurement 
+    accuracy_decimals: 1 
+    update_interval: never
+  - platform: template    
+    name: "RMS current phase c"
+    id: rms_current_phase_c
+    device_class: current
+    unit_of_measurement: A    
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never
+  - platform: template    
+    name: "RMS active power phase c"
+    id: rms_active_power_phase_c
+    device_class: power
+    unit_of_measurement: kW  
+    state_class: measurement  
+    accuracy_decimals: 4 
+    update_interval: never
+  - platform: template    
+    name: "RMS reactive power phase c"
+    id: rms_reactive_power_phase_c
+    device_class: reactive_power
+    unit_of_measurement: kvar
+    state_class: measurement  
+    accuracy_decimals: 4
+    update_interval: never
+  - platform: template    
+    name: "RMS power factor phase c"
+    id: rms_power_factor_phase_c
+    device_class: power_factor
+    unit_of_measurement: "%"
+    state_class: measurement 
+    accuracy_decimals: 3 
+    update_interval: never        
+
+  - platform: template
+    name: "RMS active power group"
+    id: rms_active_power_g
+    device_class: power
+    unit_of_measurement: kW  
+    state_class: measurement 
+    accuracy_decimals: 4
+    update_interval: never
+  - platform: template    
+    name: "RMS reactive power group"
+    id: rms_reactive_power_g
+    device_class: reactive_power
+    unit_of_measurement: kvar
+    state_class: measurement 
+    accuracy_decimals: 4     
+    update_interval: never
+  - platform: template      
+    name: "RMS power factor group"
+    id: rms_power_factor_g
+    device_class: power_factor
+    unit_of_measurement: "%"
+    state_class: measurement 
+    accuracy_decimals: 3
+    update_interval: never
+  
+  - platform: template    
+    name: "Total active energy "
+    id: total_active_energy
+    device_class: energy
+    unit_of_measurement: kWh
+    state_class: total
+    icon: mdi:home-lightning-bolt
+    accuracy_decimals: 2    
+    update_interval: never
+  - platform: template    
+    name: "Total active power"
+    id: total_active_power
+    device_class: power
+    unit_of_measurement: kW  
+    state_class: measurement
+    accuracy_decimals: 4      
+    update_interval: never
+    
+  - platform: template
+    name: "Purchase value"
+    id: prepayment_purchase_value
+    icon:  mdi:currency-usd
+    accuracy_decimals: 2  
+    update_interval: never
+  - platform: template  
+    name: "Balance kWh"
+    id: prepayment_purchases_setting_balance_kWh
+    icon: mdi:transmission-tower-import
+    unit_of_measurement: kWh
+    accuracy_decimals: 2
+    update_interval: never    
+    
+    
+number:
+  - platform: template
+    name: "Voltage high (V)"
+    icon: mdi:sine-wave
+    id: voltage_high_limit
+    update_interval: never 
+    optimistic: true
+    min_value: 240
+    max_value: 275
+    step: 1
+    mode: box 
+    
+  - platform: template
+    name: "Voltage low (V)"
+    icon: mdi:sine-wave
+    id: voltage_low_limit
+    update_interval: never   
+    optimistic: true
+    min_value: 175
+    max_value: 200
+    step: 1
+    mode: box
+    
+  - platform: template
+    name: "Current high (A)"
+    icon: mdi:current-ac
+    id: current_high_limit
+    update_interval: never   
+    optimistic: true
+    min_value: 10
+    max_value: 100.00
+    step: .01 
+    mode: box
+    
+  - platform: template
+    name: "The starting kWh value of meter (kWh)"
+    icon: mdi:transmission-tower-import
+    id: starting_kWh_value
+    update_interval: never
+    optimistic: true
+    min_value: 0
+    max_value: 999999.99
+    step: 0.01
+    mode: box
+    
+  - platform: template
+    name: "Metr price"
+    icon: mdi:currency-usd
+    id: metr_price            
+    update_interval: never 
+    optimistic: true    
+    min_value: 0
+    max_value: 5
+    step: 0.01
+    mode: box
+    
+  - platform: template
+    name: "Purchase kWh"
+    icon: mdi:transmission-tower-import
+    id: prepayment_purchase_kWh
+    update_interval: never
+    optimistic: true    
+    min_value: 0
+    max_value: 999999.99
+    step: 0.01
+
+  - platform: template
+    name: "Setting balance alarm kWh"
+    icon: mdi:transmission-tower-off
+    id: prepayment_purchases_setting_balance_alarm_kWh
+    update_interval: never
+    optimistic: true    
+    min_value: 0
+    max_value: 999999.99
+    step: 0.01
+    mode: box 
+
+    
+    
+    

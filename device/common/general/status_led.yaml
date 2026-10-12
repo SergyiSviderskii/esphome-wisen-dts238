@@ -1,0 +1,10 @@
+light:
+  - platform: status_led
+    id: status_led_on_off
+    # Если на конкретном устройстве лампа НЕ нужна в HA — 
+    # этот параметр скроет её, и она останется просто системным светодиодом
+    internal: $internal_light_mode
+    restore_mode: ALWAYS_OFF
+    pin:
+      number: $status_led
+      inverted: $status_inverted
