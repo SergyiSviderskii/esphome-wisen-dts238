@@ -3,11 +3,9 @@
 markdown
 # ESPHome Integration for DTS-238-7 Three-Phase Smart Meter (WISEN / Hekr Protocol)
 
-[English](#english) | [Русский](#русский)
+Local ESPHome firmware integration for the DTS-238-7 three-phase smart meter (WISEN / Hekr protocol). Provides complete cloud-free Home Assistant integration via API/MQTT with physical button fail-safe support.
 
 ---
-
-## English
 
 A custom firmware setup to integrate the **DTS-238-7** three-phase electric energy meter into **Home Assistant** completely locally via **ESPHome**, bypassing the cloud. This hardware natively uses the WISEN application and communicates over the Hekr protocol.
 
@@ -53,4 +51,3 @@ external_components:
 #### 4. Dashboard Visualization
 * Use the provided `lovelace.yaml` file to instantly build a comprehensive visualization dashboard card for Home Assistant.
 ---
-Local ESPHome firmware integration for the DTS-238-7 three-phase smart meter (WISEN / Hekr protocol). Provides complete cloud-free Home Assistant integration via API/MQTT with physical button fail-safe support.
